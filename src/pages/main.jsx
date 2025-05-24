@@ -32,20 +32,24 @@ const main = () => {
   }, [searchValue]);
 
   const fetchCountriesData = () => {
+    setIsLoading(true);
     fetch(`https://countriesnow.space/api/v0.1/countries`)
       .then((response) => response.json())
       .then((data) => {
         setCountries(data.data);
+        setIsLoading(false);
       });
   };
 
   const fetchWeatherData = () => {
+    setIsLoading(true);
     fetch(
       `https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${selectedCity}`
     )
       .then((response) => response.json())
       .then((data) => {
         setWeather(data?.forecast?.forecastday[0]);
+        setIsLoading(false);
       });
   };
 
@@ -53,10 +57,14 @@ const main = () => {
     setSearchValue("");
     setSelectedCity(cityName);
   };
-  console.log(selectedCity);
-  console.log(weather);
+  // console.log(selectedCity);
+  // console.log(weather);
 
-  return (
+  return isLoading ? (
+    <div className="loader-container text-[24px] font-bold flex justify-center items-center h-[100vh]">
+      Loading...
+    </div>
+  ) : (
     <div>
       <div className="relative flex w-full">
         {/* Search */}
@@ -75,7 +83,6 @@ const main = () => {
                 setSearchValue(event.target.value.toLowerCase())
               }
               value={searchValue}
-              // onKeyDown={handleEnter}
             />
           </div>
 
@@ -112,9 +119,10 @@ const main = () => {
             cloud={weather?.day?.condition?.text}
           />
         </div>
+
         <img
           src="/weather-img/vector2.svg"
-          className="absolute top-[46%] left-[48.5%] z-10"
+          className="absolute top-[45.7%] left-[48.5%] z-10"
         />
       </div>
 
@@ -135,7 +143,7 @@ const main = () => {
         </div>
         <img
           src="/weather-img/Vector.svg"
-          className="absolute top-[46%] z-10 left-[1%]"
+          className="absolute top-[45.7%] z-10 left-[1%]"
         />
       </div>
     </div>
