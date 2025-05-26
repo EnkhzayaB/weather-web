@@ -16,6 +16,8 @@ const main = () => {
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
+
     fetchWeatherData();
   }, [selectedCity]);
 
@@ -42,7 +44,6 @@ const main = () => {
   };
 
   const fetchWeatherData = () => {
-    setIsLoading(true);
     fetch(
       `https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${selectedCity}`
     )
@@ -51,20 +52,15 @@ const main = () => {
         setWeather(data?.forecast?.forecastday[0]);
         setIsLoading(false);
       });
+    // .finally(() => setIsLoading(false));
   };
 
   const handleCityClick = (cityName) => {
     setSearchValue("");
     setSelectedCity(cityName);
   };
-  // console.log(selectedCity);
-  // console.log(weather);
 
-  return isLoading ? (
-    <div className="loader-container text-[24px] font-bold flex justify-center items-center h-[100vh]">
-      Loading...
-    </div>
-  ) : (
+  return (
     <div>
       <div className="relative flex w-full">
         {/* Search */}
@@ -110,6 +106,7 @@ const main = () => {
           src="/weather-img/sun.svg"
           className="absolute top-[15%] left-[15%] z-20"
         />
+        {isLoading && <p className="text-8xl text-red-700">...Loading</p>}
 
         <div className="absolute top-[20%] left-[18%] z-50">
           <DayWeather
@@ -131,6 +128,8 @@ const main = () => {
       <div className="absolute z-20 w-[540px] h-[540px] border border-[#c1bfbf] rounded-full top-[30%] left-[39.5%] shrink-0"></div>
       <div className="absolute z-30 border border-[#c1bfbf] rounded-full w-[960px] h-[960px] top-[15%] left-[31%]"></div>
       <div className="absolute z-40 w-[1390px] h-[1390px] border rounded-full top-0 left-[22%] border-[#b4b2b2dc]"></div>
+
+      {isLoading && <p className="text-8xl text-red-700">...Loading</p>}
 
       <div className="border rounded bg-black w-[50%] border-white h-screen absolute top-0 right-0">
         <div className="absolute top-[20%] left-[25%]">
