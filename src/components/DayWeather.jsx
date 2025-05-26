@@ -6,7 +6,7 @@ const DayWeather = ({ city, temp, date, cloud }) => {
           className={` ${
             temp > 15
               ? "bg-gradient-to-t from-orange-600  via-yellow-500 to-yellow-300 text-transparent bg-clip-text"
-              : "text-blue-300"
+              : "bg-gradient-to-t from-blue-400 to-indigo-200 text-transparent bg-clip-text"
           } text-lg font-bold text-[#FF8E27]`}
         >
           {date}
@@ -21,7 +21,7 @@ const DayWeather = ({ city, temp, date, cloud }) => {
           className={` ${
             temp > 15
               ? "bg-gradient-to-t from-orange-600  via-yellow-500 to-yellow-300 text-transparent bg-clip-text"
-              : "text-blue-300"
+              : "bg-gradient-to-t from-blue-400 to-indigo-200 text-transparent bg-clip-text"
           } text-5xl font-extrabold text-[#f9ae68]`}
         >
           {city}
@@ -38,7 +38,7 @@ const DayWeather = ({ city, temp, date, cloud }) => {
           className={` ${
             temp > 15
               ? "bg-gradient-to-t from-orange-600  via-yellow-500 to-yellow-300 text-transparent bg-clip-text"
-              : "bg-gradient-to-t from-blue-400 to-blue-200 text-transparent bg-clip-text"
+              : "bg-gradient-to-t from-blue-400 to-indigo-200 text-transparent bg-clip-text"
           } text-[144px] font-extrabold absolute top-[450px] left-[75px]`}
         >
           {temp}
@@ -57,7 +57,7 @@ const DayWeather = ({ city, temp, date, cloud }) => {
         className={` ${
           temp > 15
             ? "bg-gradient-to-t from-orange-600  via-yellow-500 to-yellow-300 text-transparent bg-clip-text"
-            : "text-blue-300"
+            : "bg-gradient-to-t from-blue-400 to-indigo-200 text-transparent bg-clip-text"
         } text-2xl font-extrabold absolute top-[650px] left-[75px]`}
       >
         {cloud}

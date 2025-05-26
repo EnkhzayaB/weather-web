@@ -119,7 +119,7 @@ const main = () => {
 
         <img
           src="/weather-img/vector2.svg"
-          className="absolute top-[45.7%] left-[48.5%] z-10"
+          className="absolute top-[45.8%] left-[48.5%] z-10"
         />
       </div>
 
@@ -127,7 +127,6 @@ const main = () => {
       <div className="absolute z-10 left-[44%] top-[38%] border border-[#c1bfbf] rounded-full w-80 h-80 shrink-0"></div>
       <div className="absolute z-20 w-[540px] h-[540px] border border-[#c1bfbf] rounded-full top-[30%] left-[39.5%] shrink-0"></div>
       <div className="absolute z-30 border border-[#c1bfbf] rounded-full w-[960px] h-[960px] top-[15%] left-[31%]"></div>
-      <div className="absolute z-40 w-[1390px] h-[1390px] border rounded-full top-0 left-[22%] border-[#b4b2b2dc]"></div>
 
       {isLoading && <p className="text-8xl text-red-700">...Loading</p>}
 
@@ -142,7 +141,7 @@ const main = () => {
         </div>
         <img
           src="/weather-img/Vector.svg"
-          className="absolute top-[45.7%] z-10 left-[1%]"
+          className="absolute top-[45.8%] z-10 left-[1%]"
         />
       </div>
     </div>
