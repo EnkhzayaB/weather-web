@@ -5,7 +5,7 @@ const DayWeather = ({ city, temp, date, cloud }) => {
         temp > 15
           ? "bg-white"
           : "bg-gradient-to-t from-blue-300  via-blue-200 to-blue-50 text-transparent"
-      } bg-blend-hard-light border border-[rgba(255,255,255,0.59)] rounded-[48px] backdrop-sepia-[12px] w-[414px] h-[828px] relative z-50 backdrop-blur-xs shadow-xl/20 opacity-[90]`}
+      } rounded-[48px] w-[414px] h-[828px] relative z-50 backdrop-blur-lg  shadow-xl opacity-[90]`}
     >
       <div className="absolute top-12 left-10 not-italic">
         <p

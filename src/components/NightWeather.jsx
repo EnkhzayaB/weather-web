@@ -35,7 +35,7 @@ const NightWeather = ({ city, temp, date, cloud }) => {
       </div>
       <img
         src="/weather-img/purple.svg"
-        className="w-[128px] h-[128px] absolute top-[730px] left-[290px]"
+        className="w-[128px] h-[128px] absolute top-[830px] left-[350px]"
       />
     </div>
   );

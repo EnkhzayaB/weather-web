@@ -1,115 +1,152 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import DayWeather from "@/components/DayWeather";
+import NightWeather from "@/components/NightWeather";
+import { useEffect, useState } from "react";
+const weatherApiKey = "899d9c2c0f5845838dc70138240912";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const main = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [weather, setWeather] = useState({});
+  const [countries, setCountries] = useState([]);
+  const [selectedCity, setSelectedCity] = useState("Ulaanbaatar");
+  const [filteredCities, setFilteredCities] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+  useEffect(() => {
+    fetchCountriesData();
+  }, []);
 
-export default function Home() {
+  useEffect(() => {
+    setIsLoading(true);
+
+    fetchWeatherData();
+  }, [selectedCity]);
+
+  useEffect(() => {
+    let searchResult = [];
+    countries?.map((country) => {
+      return country?.cities?.map((city) => {
+        if (city.toLowerCase().includes(searchValue)) {
+          searchResult.push({ name: city, country: country.country });
+        }
+      });
+    });
+    setFilteredCities(searchResult.slice(0, 5));
+  }, [searchValue]);
+
+  const fetchCountriesData = () => {
+    setIsLoading(true);
+    fetch(`https://countriesnow.space/api/v0.1/countries`)
+      .then((response) => response.json())
+      .then((data) => {
+        setCountries(data.data);
+        setIsLoading(false);
+      });
+  };
+
+  const fetchWeatherData = () => {
+    fetch(
+      `https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${selectedCity}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setWeather(data?.forecast?.forecastday[0]);
+        setIsLoading(false);
+      });
+    // .finally(() => setIsLoading(false));
+  };
+
+  const handleCityClick = (cityName) => {
+    setSearchValue("");
+    setSelectedCity(cityName);
+  };
+
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/pages/index.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+    <div>
+      <div className="relative flex w-full">
+        {/* Search */}
+        <div className="p-[20px] w-screen h-screen bg-white relative">
+          <div className="w-[587px] h-[80px] flex items-center px-4 shadow-md absolute top-[11%] rounded-[20px] left-[11%] bg-white z-50">
+            <img
+              src="/weather-img/search.svg"
+              alt="search"
+              className="w-[48px] h-[48px]"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <input
+              type="text"
+              className="text-[32px] font-semibold outline-none"
+              placeholder="Search"
+              onChange={(event) =>
+                setSearchValue(event.target.value.toLowerCase())
+              }
+              value={searchValue}
+            />
+          </div>
+
+          {searchValue !== "" && (
+            <div className="w-[587px] flex flex-col p-4 shadow-sm gap-2 absolute top-[15%] rounded-[20px] left-[13%] bg-white z-60">
+              {filteredCities.map((city) => {
+                return (
+                  <div
+                    key={city.name + city.country}
+                    className="hover:bg-[#9b9b9bcc] cursor-pointer rounded-2xl flex gap-2 z-50"
+                    onClick={() => handleCityClick(city.name)}
+                  >
+                    <img src="/weather-img/location.svg" alt="" />
+                    <p className="flex items-center text-2xl font-semibold">
+                      {city.name}, {city.country}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+
+        <img
+          src="/weather-img/sun.svg"
+          className="absolute top-[13%] left-[13%] z-20"
+        />
+        {isLoading && <p className="text-8xl text-red-700">...Loading</p>}
+
+        <div className="absolute top-[20%] left-[18%] z-50">
+          <DayWeather
+            city={selectedCity}
+            temp={weather?.day?.avgtemp_c}
+            date={weather?.date}
+            cloud={weather?.day?.condition?.text}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+        </div>
+
+        <img
+          src="/weather-img/vector2.svg"
+          className="absolute top-[45.7%] left-[48.5%] z-10"
+        />
+      </div>
+
+      <div className="absolute z-5 border border-[#c1bfbf] rounded-full w-[140px] h-[140px] shrink-0 top-[44%] left-[47.5%] bg-[#f7f8f9]"></div>
+      <div className="absolute z-10 left-[44%] top-[38%] border border-[#c1bfbf] rounded-full w-80 h-80 shrink-0"></div>
+      <div className="absolute z-20 w-[540px] h-[540px] border border-[#c1bfbf] rounded-full top-[30%] left-[39.5%] shrink-0"></div>
+      <div className="absolute z-30 border border-[#c1bfbf] rounded-full w-[960px] h-[960px] top-[15%] left-[31%]"></div>
+      <div className="absolute z-40 w-[1390px] h-[1390px] border rounded-full top-0 left-[22%] border-[#b4b2b2dc]"></div>
+
+      {isLoading && <p className="text-8xl text-red-700">...Loading</p>}
+
+      <div className="border rounded bg-black w-[50%] border-white h-screen absolute top-0 right-0">
+        <div className="absolute top-[20%] left-[25%]">
+          <NightWeather
+            city={selectedCity}
+            temp={weather?.hour?.[20]?.temp_c}
+            date={weather?.date}
+            cloud={weather?.hour?.[20]?.condition?.text}
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        </div>
+        <img
+          src="/weather-img/Vector.svg"
+          className="absolute top-[45.7%] z-10 left-[1%]"
+        />
+      </div>
     </div>
   );
-}
+};
+
+export default main;
