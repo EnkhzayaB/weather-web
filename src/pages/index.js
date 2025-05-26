@@ -104,7 +104,7 @@ const main = () => {
 
         <img
           src="/weather-img/sun.svg"
-          className="absolute top-[13%] left-[13%] z-10"
+          className="absolute top-[15%] left-[13%] z-10"
         />
         {isLoading && <p className="text-8xl text-red-700">...Loading</p>}
 

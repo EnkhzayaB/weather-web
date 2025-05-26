@@ -1,12 +1,6 @@
 const DayWeather = ({ city, temp, date, cloud }) => {
   return (
-    <div
-      className={` ${
-        temp > 15
-          ? "bg-white"
-          : "bg-gradient-to-t from-blue-300  via-blue-200 to-blue-50 text-transparent"
-      } rounded-[48px] w-[414px] h-[828px] relative z-50 backdrop-blur-lg  shadow-xl opacity-[90]`}
-    >
+    <div className="rounded-[48px] w-[414px] h-[828px] relative z-50 backdrop-blur-lg  shadow-2xl backdrop-filter px-[48px] py-[56px]">
       <div className="absolute top-12 left-10 not-italic">
         <p
           className={` ${
@@ -44,8 +38,8 @@ const DayWeather = ({ city, temp, date, cloud }) => {
           className={` ${
             temp > 15
               ? "bg-gradient-to-t from-orange-600  via-yellow-500 to-yellow-300 text-transparent bg-clip-text"
-              : "bg-gradient-to-t from-blue-500 to-blue-200 text-transparent bg-clip-text"
-          } text-[144px] font-extrabold absolute top-[450px] left-[75px] `}
+              : "bg-gradient-to-t from-blue-400 to-blue-200 text-transparent bg-clip-text"
+          } text-[144px] font-extrabold absolute top-[450px] left-[75px]`}
         >
           {temp}
         </p>
@@ -53,7 +47,7 @@ const DayWeather = ({ city, temp, date, cloud }) => {
           className={` ${
             temp > 15
               ? "bg-gradient-to-t from-orange-600  via-yellow-500 to-yellow-300 text-transparent bg-clip-text"
-              : "bg-gradient-to-t from-blue-500 to-blue-200 text-transparent bg-clip-text"
+              : "bg-gradient-to-t from-blue-400 to-blue-200 text-transparent bg-clip-text"
           } absolute top-[500px] left-[350px] text-5xl font-extrabold text-orange-300 `}
         >
           °
@@ -63,7 +57,7 @@ const DayWeather = ({ city, temp, date, cloud }) => {
         className={` ${
           temp > 15
             ? "bg-gradient-to-t from-orange-600  via-yellow-500 to-yellow-300 text-transparent bg-clip-text"
-            : "text-blue-400"
+            : "text-blue-300"
         } text-2xl font-extrabold absolute top-[650px] left-[75px]`}
       >
         {cloud}

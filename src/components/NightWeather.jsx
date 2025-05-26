@@ -2,7 +2,7 @@ const NightWeather = ({ city, temp, date, cloud }) => {
   console.log(city);
 
   return (
-    <div className="bg-slate-800 rounded-[48px] w-[414px] h-[828px] relative z-40 backdrop-blur-sm shadow-xl/20 opacity-[95]">
+    <div className="rounded-[48px] w-[414px] h-[828px] relative z-40 shadow-xl/20 backdrop-blur-lg bg-transparent shadow-2xl shadow-white">
       <div className="absolute top-12 left-10 not-italic">
         <p className="text-lg font-bold text-indigo-400">{date}</p>
         <img
@@ -16,7 +16,7 @@ const NightWeather = ({ city, temp, date, cloud }) => {
         className="absolute top-[170px] left-[80px]"
       />
       <div className="flex">
-        <p className="text-[144px] font-extrabold absolute top-[450px] left-[75px] bg-gradient-to-t from-gray-900 via-gray-300 to-gray-100 text-transparent bg-clip-text">
+        <p className="text-[144px] font-extrabold absolute top-[450px] left-[75px] bg-gradient-to-t from-gray-500 via-gray-200 to-gray-100 text-transparent bg-clip-text">
           {temp}
         </p>
         <p className="absolute top-[500px] left-[350px] text-5xl font-extrabold bg-gradient-to-b from-white to-black text-transparent bg-clip-text">
