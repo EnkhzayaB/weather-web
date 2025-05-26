@@ -119,19 +119,21 @@ const main = () => {
 
         <img
           src="/weather-img/vector2.svg"
-          className="absolute top-[45.8%] left-[48.5%] z-10"
+          className="absolute top-[46%] left-[47.5%] w-[60px] z-10"
         />
       </div>
 
-      <div className="absolute z-5 border border-[#c1bfbf] rounded-full w-[140px] h-[140px] shrink-0 top-[44%] left-[47.5%] bg-[#f7f8f9]"></div>
-      <div className="absolute z-10 left-[44%] top-[38%] border border-[#c1bfbf] rounded-full w-80 h-80 shrink-0"></div>
-      <div className="absolute z-20 w-[540px] h-[540px] border border-[#c1bfbf] rounded-full top-[30%] left-[39.5%] shrink-0"></div>
-      <div className="absolute z-30 border border-[#c1bfbf] rounded-full w-[960px] h-[960px] top-[15%] left-[31%]"></div>
+      <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
+        <div className="absolute z-30 border border-[#c1bfbf] rounded-full w-[60vw] h-[60vw]"></div>
+        <div className="absolute z-20 border border-[#c1bfbf] rounded-full w-[40vw] h-[40vw]"></div>
+        <div className="absolute z-10 border border-[#c1bfbf] rounded-full w-[20vw] h-[20vw]"></div>
+        <div className="absolute z-5 border border-[#c1bfbf] rounded-full w-[10vw] h-[10vw] bg-[#f7f8f9]"></div>
+      </div>
 
       {isLoading && <p className="text-8xl text-red-700">...Loading</p>}
 
       <div className="border rounded bg-black w-[50%] border-white h-screen absolute top-0 right-0">
-        <div className="absolute top-[20%] left-[25%]">
+        <div className="absolute top-[22%] left-[25%]">
           <NightWeather
             city={selectedCity}
             temp={weather?.hour?.[20]?.temp_c}
@@ -141,7 +143,7 @@ const main = () => {
         </div>
         <img
           src="/weather-img/Vector.svg"
-          className="absolute top-[45.8%] z-10 left-[1%]"
+          className="absolute top-[46%] z-10 w-[60px] left-[0.5%]"
         />
       </div>
     </div>
