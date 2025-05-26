@@ -13,7 +13,7 @@ const DayWeather = ({ city, temp, date, cloud }) => {
             temp > 15
               ? "bg-gradient-to-t from-orange-600  via-yellow-500 to-yellow-300 text-transparent bg-clip-text"
               : "text-blue-300"
-          } text-lg font-medium text-[#FF8E27]`}
+          } text-lg font-bold text-[#FF8E27]`}
         >
           {date}
         </p>

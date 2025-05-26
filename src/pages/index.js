@@ -65,7 +65,7 @@ const main = () => {
       <div className="relative flex w-full">
         {/* Search */}
         <div className="p-[20px] w-screen h-screen bg-white relative">
-          <div className="w-[587px] h-[80px] flex items-center px-4 shadow-md absolute top-[11%] rounded-[20px] left-[11%] bg-white z-50">
+          <div className="w-[587px] h-[80px] flex items-center px-4 shadow-md absolute top-[11%] rounded-[20px] left-[11%] bg-white z-60">
             <img
               src="/weather-img/search.svg"
               alt="search"
@@ -104,7 +104,7 @@ const main = () => {
 
         <img
           src="/weather-img/sun.svg"
-          className="absolute top-[13%] left-[13%] z-20"
+          className="absolute top-[13%] left-[13%] z-10"
         />
         {isLoading && <p className="text-8xl text-red-700">...Loading</p>}
 

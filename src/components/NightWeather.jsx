@@ -4,7 +4,7 @@ const NightWeather = ({ city, temp, date, cloud }) => {
   return (
     <div className="bg-slate-800 rounded-[48px] w-[414px] h-[828px] relative z-40 backdrop-blur-sm shadow-xl/20 opacity-[95]">
       <div className="absolute top-12 left-10 not-italic">
-        <p className="text-lg font-medium text-indigo-400">{date}</p>
+        <p className="text-lg font-bold text-indigo-400">{date}</p>
         <img
           src="/weather-img/location.svg"
           className="absolute left-[290px] top-5"
